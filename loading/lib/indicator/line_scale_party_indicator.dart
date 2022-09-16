@@ -23,7 +23,7 @@ class LineScalePartyIndicator extends Indicator {
 
   @override
   List<AnimationController> animation() {
-    var controllers = List<AnimationController>();
+    final List<AnimationController> controllers = [];
     for (int i = 0; i < 4; i++) {
       var sizeController = new AnimationController(
           duration: Duration(milliseconds: durations[i]), vsync: context);
