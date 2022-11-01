@@ -51,7 +51,13 @@ class BallGridPulseIndicator extends Indicator {
     var delays = [-60, 250, -170, 480, 310, 30, 460, 780, 450];
     for (var i = 0; i < controllers.length; i++) {
       Future.delayed(Duration(milliseconds: delays[i]), () {
-        if (context.mounted) controllers[i].repeat(reverse: true);
+        if (context.mounted) {
+          final controller = controllers[i];
+
+          if (controller.isCompleted) return;
+
+          controller.repeat(reverse: true);
+        }
       });
     }
   }

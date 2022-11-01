@@ -62,6 +62,8 @@ class PacmanIndicator extends Indicator {
 
   @override
   void startAnim(AnimationController controller) {
+    if (controller.isCompleted) return;
+
     controller.repeat(reverse: true);
   }
 }

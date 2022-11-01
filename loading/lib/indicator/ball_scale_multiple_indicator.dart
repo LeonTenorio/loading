@@ -39,7 +39,13 @@ class BallScaleMultipleIndicator extends Indicator {
   startAnims(List<AnimationController> controllers) async {
     for (var i = 0; i < controllers.length; i++) {
       await Future.delayed(Duration(milliseconds: delays[i]), () {
-        if (context.mounted) controllers[i].repeat();
+        if (context.mounted) {
+          final controller = controllers[i];
+
+          if (controller.isCompleted) return;
+
+          controller.repeat();
+        }
       });
     }
   }

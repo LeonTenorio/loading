@@ -46,7 +46,12 @@ class BallSpinFadeLoaderIndicator extends Indicator {
     var delays = [0, 120, 240, 360, 480, 600, 720, 780, 840];
     for (var i = 0; i < controllers.length; i++) {
       Future.delayed(Duration(milliseconds: delays[i]), () {
-        if (context.mounted) controllers[i].repeat(reverse: true);
+        if (context.mounted) {
+          final controller = controllers[i];
+          if (controller.isCompleted) return;
+
+          controller.repeat(reverse: true);
+        }
       });
     }
   }
